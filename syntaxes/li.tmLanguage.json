@@ -1,0 +1,162 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Lithium Code Syntax",
+	"patterns": [
+		{
+			"include": "#task"
+		},
+		{
+			"include": "#action"
+		},
+		{
+			"include": "#loop"
+		},
+		{
+			"include": "#condition"
+		},
+		{
+			"include": "#error"
+		},
+		{
+			"include": "#result"
+		},
+		{
+			"include": "#target"
+		},
+		{
+			"include": "#params"
+		}
+	],
+	"repository": {
+		"task": {
+			"match": "\\b(\\[\\s*\\{)(?:.|\\n)*?\\]",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.array.begin.gotocenter"
+				}
+			}
+		},
+		"action": {
+			"begin": "\\b\\{\\s*\"name\":\\s*\"\\w+\",\\s*\"type\":\\s*\"action\"",
+			"end": "\\}",
+			"captures": {
+				"0": {
+					"name": "meta.action.gotocenter"
+				},
+				"1": {
+					"name": "punctuation.definition.block.begin.gotocenter"
+				},
+				"2": {
+					"name": "string.unquoted.label.name.gotocenter"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#target"
+				},
+				{
+					"include": "#params"
+				},
+				{
+					"include": "#result"
+				}
+			]
+		},
+		"loop": {
+			"begin": "\\b\\{\\s*\"name\":\\s*\"\\w+\",\\s*\"type\":\\s*\"loop\"",
+			"end": "\\}",
+			"captures": {
+				"0": {
+					"name": "meta.loop.gotocenter"
+				},
+				"1": {
+					"name": "punctuation.definition.block.begin.gotocenter"
+				},
+				"2": {
+					"name": "string.unquoted.label.name.gotocenter"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#task"
+				},
+				{
+					"include": "#error"
+				}
+			]
+		},
+		"condition": {
+			"begin": "\\b\\{\\s*\"name\":\\s*\"\\w+\",\\s*\"type\":\\s*\"condition\"",
+			"end": "\\}",
+			"captures": {
+				"0": {
+					"name": "meta.condition.gotocenter"
+				},
+				"1": {
+					"name": "punctuation.definition.block.begin.gotocenter"
+				},
+				"2": {
+					"name": "string.unquoted.label.name.gotocenter"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#action"
+				},
+				{
+					"include": "#result"
+				},
+				{
+					"include": "#params"
+				},
+				{
+					"include": "#task"
+				}
+			]
+		},
+		"error": {
+			"begin": "\\b\"error\":\\s*\"yes\"",
+			"end": ","
+		},
+		"result": {
+			"begin": "\\b\"result\":",
+			"end": ","
+		},
+		"target": {
+			"begin": "\\b\"target_type\":\\s*\"\\w+\",\\s*\"target\":\\s*\"\\w+\"",
+			"captures": {
+				"0": {
+					"name": "variable.other.member.target_type.gotocenter"
+				},
+				"1": {
+					"name": "variable.other.member.target.gotocenter"
+				}
+			}
+		},
+		"params": {
+			"begin": "\\b\"params\":\\s*{\\s*",
+			"end": "\\s*}",
+			"captures": {
+				"0": {
+					"name": "meta.params.gotocenter"
+				},
+				"1": {
+					"name": "punctuation.definition.block.begin.gotocenter"
+				}
+			},
+			"patterns": [
+				{
+					"match": "\\b\"\\w+\":\\s*\\d+",
+					"captures": {
+						"1": {
+							"name": "string.unquoted.label.gotocenter"
+						},
+						"2": {
+							"name": "constant.numeric.gotocenter"
+						}
+					}
+				}
+			]
+		}
+	}
+}

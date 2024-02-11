@@ -1,0 +1,41 @@
+{
+  "name": "lithiumcode",
+  "displayName": "LithiumCode",
+  "description": "Lithium Task Generation Support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "li",
+        "aliases": [
+          "LiScript",
+          "li"
+        ],
+        "extensions": [
+          ".lithium"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "li",
+        "scopeName": "source.li",
+        "path": "./syntaxes/li.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "li",
+        "prefix": "lithium",
+        "path": "./snippets/li.snippets.json"
+      }
+    ]
+  }
+}
