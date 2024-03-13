@@ -35,7 +35,22 @@
         "language": "li",
         "prefix": "lithium",
         "path": "./snippets/li.snippets.json"
+      },
+      {
+        "language": "cpp",
+        "prefix": "cpp",
+        "path": "./snippets/cpp.snippets.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "LithiumCode",
+      "properties": {
+        "providerPlugin.name": {
+          "type": "string",
+          "default": "",
+          "description": "项目名称"
+        }
+      }
+    }
   }
 }

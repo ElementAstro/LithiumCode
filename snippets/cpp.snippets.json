@@ -1,0 +1,306 @@
+{
+    "pymodule": {
+        "prefix": "pymodule",
+        "body": [
+            "void add$1Module(VM* vm){",
+            "    PyObject* mod = vm->new_module(/*module name*/);",
+            "    vm->setattr(mod, 'version', VAR(/*version*/));",
+            "    vm->bind_func<1>(mod, /*func name*/, [](VM* vm, ArgsView args) {",
+            "        return vm->py_json(args[0]);",
+            "    });",
+            "}"
+        ],
+        "description": "create a pocketpy module"
+    },
+    "Oat++ Endpoint Template": {
+        "prefix": "oatpp-endpoint",
+        "body": [
+            "ENDPOINT_INFO(${1:EndpointName}) {",
+            "    info->summary = \"Get config from global ConfigManager (thread safe)\";",
+            "    info->addConsumes<Object<{$2:ConsumeType}>>(\"application/json\");",
+            "    info->addResponse<Object<{$3:ResponseType}>>(Status::CODE_200,",
+            "                                               \"application/json\");",
+            "    info->addResponse<Object<{$4:ResponseType}>>(Status::CODE_500,",
+            "                                               \"application/json\");",
+            "}",
+            "ENDPOINT_ASYNC(\"${5:METHOD}\", \"${6:/path}\", ${1:EndpointName}) {",
+            "    ENDPOINT_ASYNC_INIT(${1:EndpointName});",
+            "    Action act() override {",
+            "        // Enter your logic here",
+            "        return createResponse(Status::CODE_200, \"OK\");",
+            "    }",
+            "};"
+        ],
+        "description": "Create a template for Oat++ Endpoint"
+    },
+    "for": {
+        "prefix": "for",
+        "body": [
+            "for (int $1 = 0; $1 < $2; $1++) {",
+            "\t$3",
+            "}"
+        ],
+        "description": "for loop"
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "if ($1) {",
+            "\t$2",
+            "}"
+        ],
+        "description": "if statement"
+    },
+    "else": {
+        "prefix": "else",
+        "body": [
+            "else {",
+            "\t",
+            "}"
+        ],
+        "description": "else statement"
+    },
+    "while": {
+        "prefix": "while",
+        "body": [
+            "while ($1) {",
+            "\t$2",
+            "}"
+        ],
+        "description": "while loop"
+    },
+    "class": {
+        "prefix": "class",
+        "body": [
+            "class $1 {",
+            "\t$2",
+            "}"
+        ],
+        "description": "class definition"
+    },
+    "struct": {
+        "prefix": "struct",
+        "body": [
+            "struct $1 {",
+            "\t$2",
+            "}"
+        ],
+        "description": "struct definition"
+    },
+    "switch": {
+        "prefix": "switch",
+        "body": [
+            "switch ($1) {",
+            "\tcase $2:",
+            "\t\t$3",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "switch case statement"
+    },
+    "case": {
+        "prefix": "case",
+        "body": [
+            "case $1:",
+            "\t$2",
+            "\tbreak;"
+        ],
+        "description": "case in switch"
+    },
+    "main": {
+        "prefix": "main",
+        "body": [
+            "int main(int argc, char** argv) {",
+            "\t",
+            "   return 0;",
+            "}"
+        ],
+        "description": "main function"
+    },
+    "include": {
+        "prefix": "include",
+        "body": [
+            "#include \"\""
+        ],
+        "description": "include header file"
+    },
+    "cout": {
+        "prefix": "cout",
+        "body": [
+            "std::cout <<  << std::endl;"
+        ],
+        "description": "output to console"
+    },
+    "cin": {
+        "prefix": "cin",
+        "body": [
+            "std::cin >> ;"
+        ],
+        "description": "input from console"
+    },
+    "vector": {
+        "prefix": "vector",
+        "body": [
+            "std::vector<$1> $2;"
+        ],
+        "description": "vector declaration"
+    },
+    "map": {
+        "prefix": "map",
+        "body": [
+            "std::map<$1, $2> $3;"
+        ],
+        "description": "map declaration"
+    },
+    "func": {
+        "prefix": "func",
+        "body": [
+            "void $1($2) {",
+            "\t$3",
+            "}"
+        ],
+        "description": "function declaration"
+    },
+    "foreach": {
+        "prefix": "foreach",
+        "body": [
+            "for (auto $1 : $2) {",
+            "\t$3",
+            "}"
+        ],
+        "description": "foreach loop"
+    },
+    "try": {
+        "prefix": "try",
+        "body": [
+            "try {",
+            "\t$1",
+            "} catch (...) {",
+            "\t$2",
+            "}"
+        ],
+        "description": "try-catch block"
+    },
+    "catch": {
+        "prefix": "catch",
+        "body": [
+            "catch (...) {",
+            "\t",
+            "}"
+        ],
+        "description": "catch block"
+    },
+    "throw": {
+        "prefix": "throw",
+        "body": [
+            "throw ;"
+        ],
+        "description": "throw exception"
+    },
+    "const": {
+        "prefix": "const",
+        "body": [
+            "const $1 $2;"
+        ],
+        "description": "const variable"
+    },
+    "typedef": {
+        "prefix": "typedef",
+        "body": [
+            "typedef $1 $2;"
+        ],
+        "description": "typedef declaration"
+    },
+    "namespace": {
+        "prefix": "namespace",
+        "body": [
+            "namespace $1 {",
+            "\t$2",
+            "}"
+        ],
+        "description": "namespace declaration"
+    },
+    "return": {
+        "prefix": "return",
+        "body": [
+            "return ;"
+        ],
+        "description": "return statement"
+    },
+    "new": {
+        "prefix": "new",
+        "body": [
+            "new ;"
+        ],
+        "description": "new object creation"
+    },
+    "delete": {
+        "prefix": "delete",
+        "body": [
+            "delete ;"
+        ],
+        "description": "delete object"
+    },
+    "sizeof": {
+        "prefix": "sizeof",
+        "body": [
+            "sizeof();"
+        ],
+        "description": "sizeof operator"
+    },
+    "vecprint": {
+        "prefix": "vecprint",
+        "body": [
+            "for (auto $1 : $2) {",
+            "   std::cout <<  << std::endl;",
+            "}"
+        ],
+        "description": "print vector"
+    },
+    "veccontains": {
+        "prefix": "veccontains",
+        "body": [
+            "std::find(${1:vector_name}.begin(), ${1:vector_name}.end(), ${2:value}) != ${1:vector_name}.end();"
+        ],
+        "description": "check if vector contains"
+    },
+    "mapprint": {
+        "prefix": "mapprint",
+        "body": [
+            "for (auto $1 : $2) {",
+            "   std::cout <<  << std::endl;",
+            "}"
+        ],
+        "description": "print map"
+    },
+    "mapprint_s": {
+        "prefix": "mapprint_s",
+        "body": [
+            "for (auto [key, value] : $1) {",
+            "   std::cout <<  << std::endl;",
+            "}"
+        ],
+        "description": "print map"
+    },
+    "mapcontainskey": {
+        "prefix": "mapcontainskey",
+        "body": [
+            "${1:map_name}.find(${2:key}) != ${1:map_name}.end();"
+        ],
+        "description": "check if map contains key"
+    },
+    "mapcontainsvalue": {
+        "prefix": "mapcontainsvalue",
+        "body": [
+            "${1:map_name}.find(${2:value}) != ${1:map_name}.end();"
+        ],
+        "description": "check if map contains value"
+    },
+    "setcontains": {
+        "prefix": "setcontains",
+        "body": [
+            "std::find(${1:set_name}.begin(), ${1:set_name}.end(), ${2:value}) != ${1:set_name}.end();"
+        ],
+        "description": "check if set contains"
+    }
+}
